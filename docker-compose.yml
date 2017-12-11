@@ -1,0 +1,56 @@
+# SOURCE: https://github.com/yeasy/docker-compose-files/blob/master/mongo_cluster/scripts/mongosetup.sh
+# SOURCE: http://www.sohamkamani.com/blog/2016/06/30/docker-mongo-replica-set/
+version: '3'
+services:
+  mongo5:
+    image: mongo:3.2
+    hostname: mongo5
+    expose:
+      - "27017"
+    volumes:
+      - /mongo5:/data/db
+    # restart: always
+    entrypoint: [ "mongod", "--replSet", "book", "--rest", "--httpinterface" ]
+  mongo4:
+    image: mongo:3.2
+    hostname: mongo4
+    expose:
+      - "27017"
+    volumes:
+      - /mongo4:/data/db
+    # restart: always
+    entrypoint: [ "mongod", "--replSet", "book", "--rest", "--httpinterface" ]
+  mongo3:
+    image: mongo:3.2
+    hostname: mongo3
+    expose:
+      - "27017"
+    volumes:
+      - /mongo3:/data/db
+    # restart: always
+    entrypoint: [ "mongod", "--replSet", "book", "--rest", "--httpinterface" ]
+  mongo2:
+    image: mongo:3.2
+    hostname: mongo2
+    expose:
+      - "27017"
+    volumes:
+      - /mongo2:/data/db
+    # restart: always
+    entrypoint: [ "mongod", "--replSet", "book", "--rest", "--httpinterface" ]
+  mongo1:
+    image: mongo:3.2
+    hostname: mongo1
+    expose:
+      - "27017"
+    volumes:
+      - /mongo1:/data/db
+    # restart: always
+    entrypoint: [ "mongod", "--replSet", "book", "--rest", "--httpinterface" ]
+  mongosetup:
+    image: mongo:3.2
+    expose:
+      - "27017"
+    # restart: always
+    volumes:
+     - /mongosetup:/data/db

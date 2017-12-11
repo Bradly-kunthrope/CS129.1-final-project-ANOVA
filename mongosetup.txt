@@ -1,0 +1,42 @@
+-- mongo3.6
+& "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --replSet book --dbpath mongo1 --port 27017
+& "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --replSet book --dbpath mongo2 --port 27018
+& "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --replSet book --dbpath mongo3 --port 27019
+var cfg = {
+	"_id": "book",
+	"version": 1,
+	"members": [
+		{
+			"_id": 0,
+			"host": "localhost:27017",
+			"priority": 1
+		},
+		{
+			"_id": 1,
+			"host": "localhost:27018",
+			"priority": 0
+		},
+		{
+			"_id": 2,
+			"host": "localhost:27019",
+			"priority": 0
+		}
+	]
+}
+
+mongo localhost:27017/book
+
+
+db.anova.find({"loan_status": ""});
+db.anova.remove({"loan_status": null}); //removing the extra classification for loan_status
+db.anova.distinct('loan_status') //check if no more empty classification
+db.anova.update(
+   {},
+   { $unset: {'id':1}},
+   false, true
+ ) // remove empty column
+db.anova.update(
+   {},
+   { $unset: {'member_id':1}},
+   false, true
+ ) //remove another empty column
